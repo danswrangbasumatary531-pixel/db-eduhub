@@ -1,0 +1,2384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>Q&A · MCQ Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --text-primary: #0b1b2f;
+            --text-secondary: #1a4a3a;
+            --border-color: rgba(255, 255, 255, 0.3);
+            --border-light: rgba(255, 255, 255, 0.2);
+            --primary: #0d9488;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --gold: #f59e0b;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            --radius: 28px;
+            --radius-sm: 16px;
+            --header-bg: rgba(255, 255, 255, 0.15);
+            --contact-bg: rgba(255, 255, 255, 0.2);
+            --search-bg: rgba(255, 255, 255, 0.9);
+            --footer-color: #e2e8f0;
+        }
+
+        body.dark {
+            --card-bg: rgba(20, 40, 35, 0.92);
+            --text-primary: #e2e8f0;
+            --text-secondary: #b2dfdb;
+            --border-color: rgba(255, 255, 255, 0.15);
+            --border-light: rgba(255, 255, 255, 0.08);
+            --header-bg: rgba(0, 0, 0, 0.3);
+            --contact-bg: rgba(0, 0, 0, 0.25);
+            --search-bg: rgba(30, 50, 45, 0.9);
+            --footer-color: #a5d6a7;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Ultra Smooth & Fast Color Changing Background Animation */
+        @keyframes smoothColorFlow {
+            0% { background: linear-gradient(135deg, #0a5e3a, #0d9488, #06b6d4); }
+            8% { background: linear-gradient(135deg, #0d9488, #06b6d4, #f59e0b); }
+            16% { background: linear-gradient(135deg, #06b6d4, #f59e0b, #0d9488); }
+            25% { background: linear-gradient(135deg, #f59e0b, #0d9488, #0891b2); }
+            33% { background: linear-gradient(135deg, #0891b2, #0a5e3a, #0d9488); }
+            41% { background: linear-gradient(135deg, #0d9488, #0891b2, #f59e0b); }
+            50% { background: linear-gradient(135deg, #f59e0b, #0d9488, #06b6d4); }
+            58% { background: linear-gradient(135deg, #06b6d4, #f59e0b, #0a5e3a); }
+            66% { background: linear-gradient(135deg, #0a5e3a, #06b6d4, #0891b2); }
+            75% { background: linear-gradient(135deg, #0891b2, #0a5e3a, #f59e0b); }
+            83% { background: linear-gradient(135deg, #f59e0b, #0891b2, #0d9488); }
+            91% { background: linear-gradient(135deg, #0d9488, #0a5e3a, #06b6d4); }
+            100% { background: linear-gradient(135deg, #0a5e3a, #0d9488, #06b6d4); }
+        }
+
+        @keyframes smoothColorFlowDark {
+            0% { background: linear-gradient(135deg, #064a3a, #0d9488, #065a6a); }
+            8% { background: linear-gradient(135deg, #0d9488, #065a6a, #8b6914); }
+            16% { background: linear-gradient(135deg, #065a6a, #8b6914, #0d9488); }
+            25% { background: linear-gradient(135deg, #8b6914, #0d9488, #047a8a); }
+            33% { background: linear-gradient(135deg, #047a8a, #064a3a, #0d9488); }
+            41% { background: linear-gradient(135deg, #0d9488, #047a8a, #8b6914); }
+            50% { background: linear-gradient(135deg, #8b6914, #0d9488, #065a6a); }
+            58% { background: linear-gradient(135deg, #065a6a, #8b6914, #064a3a); }
+            66% { background: linear-gradient(135deg, #064a3a, #065a6a, #047a8a); }
+            75% { background: linear-gradient(135deg, #047a8a, #064a3a, #8b6914); }
+            83% { background: linear-gradient(135deg, #8b6914, #047a8a, #0d9488); }
+            91% { background: linear-gradient(135deg, #0d9488, #064a3a, #065a6a); }
+            100% { background: linear-gradient(135deg, #064a3a, #0d9488, #065a6a); }
+        }
+
+        /* Card Border Color Flow */
+        @keyframes cardColorFlow {
+            0% { border-color: #0d9488; }
+            20% { border-color: #f59e0b; }
+            40% { border-color: #06b6d4; }
+            60% { border-color: #0891b2; }
+            80% { border-color: #f59e0b; }
+            100% { border-color: #0d9488; }
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 15px rgba(13, 148, 136, 0.15); }
+            25% { box-shadow: 0 0 25px rgba(245, 158, 11, 0.2); }
+            50% { box-shadow: 0 0 15px rgba(6, 182, 212, 0.15); }
+            75% { box-shadow: 0 0 25px rgba(8, 145, 178, 0.2); }
+            100% { box-shadow: 0 0 15px rgba(13, 148, 136, 0.15); }
+        }
+
+        @keyframes textGradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Inter', 'Space Grotesk', sans-serif;
+            padding: 12px;
+            min-height: 100vh;
+            transition: background 0.3s ease;
+            color: var(--text-primary);
+            background-attachment: fixed;
+            animation: smoothColorFlow 8s ease-in-out infinite;
+            background-size: 300% 300%;
+            will-change: background, transform;
+        }
+
+        body.dark {
+            animation: smoothColorFlowDark 9s ease-in-out infinite;
+            background-size: 300% 300%;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        .dark-mode-toggle:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Admin Button */
+        .admin-toggle {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            padding: 12px 20px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            z-index: 999;
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        .admin-toggle:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .admin-toggle.unlocked {
+            background: rgba(255, 215, 0, 0.3);
+            border-color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 16px;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 20px 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            animation: cardColorFlow 5s ease-in-out infinite;
+        }
+
+        .badge-important {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #0d9488, #06b6d4, #f59e0b);
+            background-size: 300% 300%;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 40px;
+            margin-bottom: 12px;
+            animation: gradientShift 2.5s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .premium-name {
+            font-size: clamp(1.8rem, 7vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #fef9c3, #a7f3d0, #67e8f9, #ffffff);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            animation: textGradientFlow 3s ease-in-out infinite;
+        }
+
+        .sub-title {
+            font-size: clamp(0.9rem, 4vw, 1.3rem);
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .desc {
+            max-width: 90%;
+            margin: 12px auto 0;
+            font-size: clamp(10px, 3.5vw, 13px);
+            background: var(--contact-bg);
+            backdrop-filter: blur(8px);
+            padding: 8px 16px;
+            border-radius: 32px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Class Filter Section */
+        .class-filter-section {
+            background: var(--contact-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border: 1px solid var(--border-color);
+            animation: cardColorFlow 6s ease-in-out infinite;
+        }
+
+        .class-filter-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .class-filter-title i {
+            color: #a7f3d0;
+        }
+
+        .class-filter-title .active-filter {
+            background: rgba(167, 243, 208, 0.2);
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #a7f3d0;
+        }
+
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .filter-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.75rem;
+            font-weight: 600;
+            min-width: 60px;
+        }
+
+        .class-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .class-btn {
+            padding: 6px 18px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            backdrop-filter: blur(4px);
+            white-space: nowrap;
+        }
+
+        .class-btn:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .class-btn.active {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #a7f3d0;
+            color: white;
+            box-shadow: 0 0 20px rgba(167, 243, 208, 0.15);
+        }
+
+        .class-btn.department-btn {
+            border-color: rgba(167, 243, 208, 0.25);
+            background: rgba(167, 243, 208, 0.06);
+        }
+
+        .class-btn.department-btn:hover {
+            background: rgba(167, 243, 208, 0.15);
+        }
+
+        .class-btn.department-btn.active {
+            background: rgba(167, 243, 208, 0.2);
+            border-color: #a7f3d0;
+        }
+
+        /* Department Grid */
+        .dept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .dept-grid .class-btn {
+            text-align: center;
+            font-size: 0.75rem;
+            padding: 5px 12px;
+        }
+
+        /* Contact Showcase */
+        .contact-showcase {
+            background: var(--contact-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 28px;
+            padding: 12px 16px;
+            margin: 16px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--border-color);
+            animation: cardColorFlow 6s ease-in-out infinite;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .contact-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 12px;
+            border-radius: 40px;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-item i {
+            font-size: 12px;
+            color: #a7f3d0;
+        }
+
+        .contact-item a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px) scale(1.02);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* View Toggle */
+        .view-toggle {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 16px 0;
+            flex-wrap: wrap;
+        }
+        .view-toggle .btn {
+            padding: 10px 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            backdrop-filter: blur(4px);
+        }
+        .view-toggle .btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .view-toggle .btn.active {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: #a7f3d0;
+            color: white;
+            box-shadow: 0 0 30px rgba(167, 243, 208, 0.2);
+        }
+
+        /* Search Box */
+        .search-container {
+            margin: 16px 0;
+            position: relative;
+        }
+        .search-box {
+            width: 100%;
+            max-width: 550px;
+            margin: 0 auto;
+            display: block;
+            position: relative;
+        }
+        .search-box i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #0d9488;
+            font-size: 18px;
+            z-index: 1;
+            animation: textGradientFlow 2.5s ease-in-out infinite;
+        }
+        .search-input {
+            width: 100%;
+            padding: 14px 20px 14px 52px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 60px;
+            font-size: 14px;
+            background: var(--search-bg);
+            color: var(--text-primary);
+            transition: all 0.2s;
+            outline: none;
+            font-family: inherit;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+        }
+        .search-input:focus {
+            border-color: #a7f3d0;
+            box-shadow: 0 0 0 3px rgba(167, 243, 208, 0.2);
+        }
+        .search-stats {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 8px;
+            background: var(--contact-bg);
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .clear-search {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 16px;
+            display: none;
+        }
+        .clear-search.visible {
+            display: block;
+        }
+
+        /* Live Feed - Book Style List */
+        .live-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 16px 0;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .live-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(6px);
+            border-radius: 16px;
+            padding: 18px 22px;
+            border: 2px solid var(--border-color);
+            box-shadow: var(--shadow);
+            transition: all 0.2s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            animation: cardColorFlow 5s ease-in-out infinite;
+        }
+
+        .live-card:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 12px 40px rgba(13, 148, 136, 0.2);
+        }
+
+        .live-card .question-number {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .live-card .question-number .num-badge {
+            background: linear-gradient(135deg, #0d9488, #06b6d4);
+            background-size: 200% 200%;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            animation: gradientShift 2.5s ease-in-out infinite;
+        }
+
+        .live-card .class-tag {
+            font-size: 0.6rem;
+            background: rgba(13, 148, 136, 0.2);
+            padding: 2px 10px;
+            border-radius: 20px;
+            color: var(--text-secondary);
+            border: 1px solid rgba(13, 148, 136, 0.2);
+        }
+
+        .live-card .dept-tag {
+            font-size: 0.6rem;
+            background: rgba(245, 158, 11, 0.15);
+            padding: 2px 10px;
+            border-radius: 20px;
+            color: var(--text-secondary);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .live-card .question-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            padding-left: 4px;
+        }
+
+        .live-card .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin: 6px 0 4px 0;
+        }
+
+        .live-card .option-item {
+            padding: 7px 14px;
+            border-radius: 10px;
+            background: rgba(13, 148, 136, 0.08);
+            border-left: 3px solid rgba(13, 148, 136, 0.3);
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+
+        .live-card .option-item:hover {
+            transform: translateX(3px);
+            background: rgba(13, 148, 136, 0.15);
+        }
+
+        .live-card .option-item .opt-label {
+            font-weight: 700;
+            color: var(--text-secondary);
+            min-width: 22px;
+            font-size: 0.85rem;
+        }
+
+        .live-card .option-item.correct {
+            border-left-color: var(--success);
+            background: rgba(22, 163, 74, 0.12);
+        }
+
+        .live-card .option-item .check-mark {
+            color: var(--success);
+            font-weight: 700;
+            margin-left: auto;
+        }
+
+        .live-card .answer-section {
+            margin-top: 10px;
+            padding: 8px 14px;
+            background: rgba(13, 148, 136, 0.08);
+            border-radius: 10px;
+            border-left: 3px solid #0d9488;
+        }
+
+        .live-card .answer-section .answer-label {
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: #0d9488;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .live-card .answer-section .answer-text {
+            font-size: 0.92rem;
+            color: var(--text-primary);
+        }
+
+        .live-card .meta {
+            margin-top: 10px;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 16px;
+            padding-top: 6px;
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .empty-state {
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            padding: 40px 10px;
+        }
+        .empty-state i {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 12px;
+            opacity: 0.5;
+        }
+
+        /* Admin Panel Modal */
+        .admin-panel-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .admin-panel-modal.active {
+            display: flex;
+        }
+
+        .admin-card {
+            background: var(--card-bg);
+            border-radius: 32px;
+            padding: 24px;
+            max-width: 520px;
+            width: 92%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 2px solid var(--gold);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .admin-card .admin-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .admin-card .admin-title i {
+            color: var(--gold);
+        }
+
+        .admin-login-section {
+            text-align: center;
+        }
+        .admin-login-section input {
+            width: 100%;
+            padding: 12px 16px;
+            margin: 6px 0;
+            border: 1.5px solid var(--border-color);
+            border-radius: 40px;
+            font-size: 0.95rem;
+            background: var(--search-bg);
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+        .admin-login-section input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2);
+        }
+        .admin-login-section .login-error {
+            color: var(--danger);
+            font-size: 0.8rem;
+            margin-top: 6px;
+        }
+        .admin-login-section .login-success {
+            color: var(--success);
+            font-size: 0.8rem;
+            margin-top: 6px;
+        }
+
+        .admin-content {
+            display: none;
+            flex-direction: column;
+        }
+        .admin-content.active {
+            display: flex;
+        }
+
+        .admin-extra-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 12px 0 16px;
+            padding: 12px;
+            background: var(--contact-bg);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+        }
+        .admin-extra-actions .btn {
+            flex: 1;
+            min-width: 80px;
+            justify-content: center;
+            font-size: 0.75rem;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        .admin-extra-actions .btn:hover {
+            transform: scale(1.02);
+        }
+        .admin-extra-actions .btn-outline-primary {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .admin-extra-actions .btn-outline-primary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .admin-extra-actions .btn-danger-outline {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+        .admin-extra-actions .btn-danger-outline:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        .cms-form .form-group {
+            margin-bottom: 12px;
+        }
+        .cms-form label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+        .cms-form input,
+        .cms-form textarea,
+        .cms-form select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            background: var(--search-bg);
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+        .cms-form input:focus,
+        .cms-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        @media (max-width: 480px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option-input-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--contact-bg);
+            padding: 3px 6px 3px 10px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+        .option-input-group:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.2);
+        }
+        .option-input-group input[type="text"] {
+            flex: 1;
+            border: none;
+            padding: 6px 0;
+            background: transparent;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+        .option-input-group input[type="text"]:focus {
+            outline: none;
+        }
+        .option-input-group input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+        .option-input-group .opt-label {
+            font-weight: 700;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            min-width: 18px;
+        }
+
+        /* Department & Class Selector in Admin */
+        .admin-select-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        @media (max-width: 480px) {
+            .admin-select-group {
+                grid-template-columns: 1fr;
+            }
+        }
+        .admin-select-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            background: var(--search-bg);
+            color: var(--text-primary);
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+            background: var(--contact-bg);
+            padding: 6px 12px;
+            border-radius: 40px;
+            margin: 4px 0 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+        .toolbar .tool-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            padding: 3px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-primary);
+        }
+        .toolbar .tool-btn:hover {
+            transform: scale(1.05);
+        }
+        .toolbar .tool-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .color-picker-wrap {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--card-bg);
+            padding: 2px 10px 2px 4px;
+            border-radius: 40px;
+            border: 1px solid var(--border-color);
+        }
+        .color-picker-wrap input[type="color"] {
+            width: 28px;
+            height: 28px;
+            border: none;
+            border-radius: 40px;
+            padding: 0;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .form-actions .btn {
+            flex: 1;
+            min-width: 100px;
+            justify-content: center;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .form-actions .btn:hover {
+            transform: scale(1.02);
+        }
+        .form-actions .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        .form-actions .btn-success:hover {
+            background: #15803d;
+        }
+        .form-actions .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .question-list-container {
+            margin-top: 16px;
+        }
+        .question-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .question-list-header span {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+        .question-count-badge {
+            background: var(--contact-bg);
+            padding: 2px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .question-list {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        .question-item {
+            background: var(--card-bg);
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 6px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        .question-item:hover {
+            border-color: var(--primary);
+            transform: translateX(3px);
+        }
+        .question-item .q-text {
+            font-weight: 500;
+            flex: 1;
+            margin-right: 10px;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+        .question-item .q-actions {
+            display: flex;
+            gap: 2px;
+        }
+        .question-item .q-actions button {
+            background: transparent;
+            border: none;
+            font-size: 0.8rem;
+            padding: 3px 8px;
+            border-radius: 30px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+        .question-item .q-actions button:hover {
+            background: var(--border-color);
+            transform: scale(1.1);
+        }
+        .question-item .q-actions .edit-btn {
+            color: var(--primary);
+        }
+        .question-item .q-actions .delete-btn {
+            color: var(--danger);
+        }
+
+        .visitor-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--contact-bg);
+            padding: 3px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--border-color);
+            margin-left: 10px;
+        }
+
+        .info-strip {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 10px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-top: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: cardColorFlow 6s ease-in-out infinite;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 11px;
+            color: var(--footer-color);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+            line-height: 1.6;
+        }
+        .footer-contact {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin: 10px 0;
+        }
+        .footer-contact a {
+            color: var(--footer-color);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 5px 12px;
+            border-radius: 40px;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .footer-contact a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.02);
+        }
+
+        .public-notice {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            border-left: 6px solid #f59e0b;
+            border-radius: 20px;
+            padding: 14px 18px;
+            margin: 16px 0 8px;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: cardColorFlow 5s ease-in-out infinite;
+        }
+        .public-notice i {
+            color: #f59e0b;
+            margin-right: 8px;
+        }
+
+        /* Style Classes */
+        .highlight-bg {
+            background: #fef9c3;
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+        body.dark .highlight-bg {
+            background: #fbbf24;
+            color: #0f172a;
+        }
+        .bold-text {
+            font-weight: 700;
+        }
+        .italic-text {
+            font-style: italic;
+        }
+        .text-green {
+            color: #16a34a;
+        }
+        .text-cyan {
+            color: #0891b2;
+        }
+        .text-yellow {
+            color: #ca8a04;
+        }
+        body.dark .text-yellow {
+            color: #fbbf24;
+        }
+        .text-blue {
+            color: #2563eb;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+        /* View filtering */
+        .mcq-view .qa-card {
+            display: none !important;
+        }
+        .mcq-view .mcq-card {
+            display: flex !important;
+        }
+        .qa-view .mcq-card {
+            display: none !important;
+        }
+        .qa-view .qa-card {
+            display: flex !important;
+        }
+        .all-view .mcq-card,
+        .all-view .qa-card {
+            display: flex !important;
+        }
+
+        .live-card.mcq-card {
+            display: flex;
+        }
+        .live-card.qa-card {
+            display: flex;
+        }
+
+        @media (max-width: 600px) {
+            .admin-toggle {
+                bottom: 70px;
+                right: 10px;
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+            .dark-mode-toggle {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            .admin-card {
+                padding: 16px;
+            }
+            .live-card {
+                padding: 14px 16px;
+            }
+            .live-card .question-text {
+                font-size: 0.95rem;
+            }
+            .admin-select-group {
+                grid-template-columns: 1fr;
+            }
+            .dept-grid {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="dark-mode-toggle" id="darkModeToggle">🌙</button>
+    <button class="admin-toggle" id="adminToggleBtn">
+        <i class="fas fa-lock lock-icon"></i>
+        <span>Admin</span>
+    </button>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="badge-important"><i class="fas fa-crown"></i> ✨ Q&A · MCQ Pro ✨</div>
+            <div class="premium-name">DB EduHub</div>
+            <div class="sub-title">Interactive Q&A Platform</div>
+            <div class="desc">🌈 Premium Q&A system with multiple-choice questions, real-time updates, and admin controls 🌈</div>
+        </div>
+
+        <!-- Class Filter Section -->
+        <div class="class-filter-section">
+            <div class="class-filter-title">
+                <i class="fas fa-graduation-cap"></i> Classes
+                <span class="active-filter" id="activeFilterDisplay">All</span>
+            </div>
+
+            <!-- Class Row -->
+            <div class="filter-row">
+                <span class="filter-label">Classes:</span>
+                <div class="class-buttons" id="classFilterButtons">
+                    <button class="class-btn active" data-class="all">All</button>
+                    <button class="class-btn" data-class="9">Class 9</button>
+                    <button class="class-btn" data-class="10">Class 10</button>
+                    <button class="class-btn department-btn" data-class="ba">BA</button>
+                </div>
+            </div>
+
+            <!-- Department Grid - Only shows when BA is selected -->
+            <div id="deptFilterContainer" style="display: none;">
+                <div class="filter-row" style="margin-top: 6px;">
+                    <span class="filter-label">BA Dept:</span>
+                    <div class="dept-grid" id="deptFilterButtons">
+                        <button class="class-btn active" data-dept="all">All</button>
+                        <button class="class-btn department-btn" data-dept="political-science">Political Science</button>
+                        <button class="class-btn department-btn" data-dept="education">Education</button>
+                        <button class="class-btn department-btn" data-dept="history">History</button>
+                        <button class="class-btn department-btn" data-dept="philosophy">Philosophy</button>
+                        <button class="class-btn department-btn" data-dept="sociology">Sociology</button>
+                        <button class="class-btn department-btn" data-dept="economics">Economics</button>
+                        <button class="class-btn department-btn" data-dept="english">English</button>
+                        <button class="class-btn department-btn" data-dept="assamese">Assamese</button>
+                        <button class="class-btn department-btn" data-dept="bodo">Bodo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Showcase -->
+        <div class="contact-showcase">
+            <div class="contact-details">
+                <div class="contact-item" onclick="window.location.href='tel:+918011762513'"><i class="fas fa-phone-alt"></i> <span>+91 8011762513</span></div>
+                <div class="contact-item" onclick="window.location.href='mailto:dibakarbasumatary841@gmail.com'"><i class="fas fa-envelope"></i> <span>dibakarbasumatary841@gmail.com</span></div>
+                <div class="contact-item"><i class="fab fa-facebook"></i><a href="https://www.facebook.com/share/1AgAeBtbud/" target="_blank">Facebook</a></div>
+                <div class="contact-item"><i class="fab fa-instagram"></i><a href="https://www.instagram.com/danswrang3041?igsh=MXRkMzZqbWduMjdsNw==" target="_blank">Instagram</a></div>
+               <div class="contact-item"><i class="fas fa-globe"></i><a href="https://bodo-computer-ans.netlify.app/" target="_blank">Computer QNA(Bodo)</a></div>
+                <div class="contact-item"><i class="fas fa-globe"></i><a href="https://dibakar-services.netlify.app/" target="_blank">Portfolio</a></div>
+            </div>
+        </div>
+
+        <!-- View Toggle -->
+        <div class="view-toggle">
+            <button class="btn active" id="mcqViewBtn"><i class="fas fa-list-ul"></i> MCQ Only</button>
+            <button class="btn" id="qaViewBtn"><i class="fas fa-question-circle"></i> Q&A Only</button>
+            <button class="btn" id="allViewBtn"><i class="fas fa-th-large"></i> All</button>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search questions..." autocomplete="off">
+                <button id="clearSearchBtn" class="clear-search"><i class="fas fa-times-circle"></i></button>
+            </div>
+            <div style="text-align: center;"><span class="search-stats" id="searchStats">Loading questions...</span></div>
+        </div>
+
+        <!-- Live Feed -->
+        <div id="liveFeed" class="live-feed mcq-view"></div>
+
+        <!-- Notice -->
+        <div class="public-notice">
+            <i class="fas fa-exclamation-triangle"></i> <strong>📢 Notice:</strong> This platform is for educational purposes. All content is managed by the admin.
+        </div>
+
+        <div class="info-strip">
+            <span><i class="fas fa-shield-alt"></i> Secure & Verified</span>
+            <span><i class="fas fa-lock"></i> Real-time Updates | v2.0</span>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-contact">
+                <a href="tel:+918011762513"><i class="fas fa-phone-alt"></i> +91 8011762513</a>
+                <a href="mailto:dibakarbasumatary841@gmail.com"><i class="fas fa-envelope"></i> dibakarbasumatary841@gmail.com</a>
+                <a href="https://www.facebook.com/share/1AgAeBtbud/" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="https://www.instagram.com/danswrang3041?igsh=MXRkMzZqbWduMjdsNw==" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://bodo-chatbot.netlify.app/" target="_blank"><i class="fas fa-globe"></i> Portfolio</a>
+            </div>
+            <div style="margin-top: 10px; font-size: 10px; opacity: 0.7;">© 2026 Dibakar Basumatary — Q&A Platform</div>
+        </footer>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="adminPanelModal" class="admin-panel-modal">
+        <div class="admin-card">
+            <div class="admin-title">
+                <i class="fas fa-user-shield"></i> Admin CMS
+                <span class="visitor-counter">
+                    <i class="fas fa-eye"></i> <span id="visitorCount">0</span>
+                </span>
+            </div>
+
+            <!-- Login Section -->
+            <div id="adminLoginSection" class="admin-login-section">
+                <i class="fas fa-lock" style="font-size: 2rem; color: var(--gold); display: block; margin-bottom: 8px;"></i>
+                <h3 style="margin-bottom: 8px; font-weight: 700; color: var(--text-primary);">Admin Access</h3>
+                <input type="email" id="adminEmail" placeholder="Enter your email" value="">
+                <input type="password" id="adminPassword" placeholder="Enter your password" value="">
+                <button id="adminLoginBtn" style="width:100%; max-width:280px; padding:12px; background: var(--primary); color: white; border: none; border-radius: 40px; font-weight: 600; cursor: pointer; margin-top: 8px; transition: all 0.2s;">
+                    <i class="fas fa-sign-in-alt"></i> Sign in with Firebase
+                </button>
+                <div id="loginError" class="login-error"></div>
+                <div id="loginSuccess" class="login-success"></div>
+                <div style="margin-top: 8px; font-size: 0.65rem; color: var(--text-secondary);">Use your Firebase Email & Password</div>
+            </div>
+
+            <!-- CMS Content -->
+            <div id="adminContent" class="admin-content">
+                <div class="admin-extra-actions">
+                    <button class="btn btn-outline-primary" id="addMCQBtn"><i class="fas fa-plus-circle"></i> MCQ</button>
+                    <button class="btn btn-outline-primary" id="addQABtn"><i class="fas fa-plus-circle"></i> Q&A</button>
+                    <button class="btn btn-danger-outline" id="clearAllBtn"><i class="fas fa-trash-alt"></i> Clear</button>
+                    <button class="btn btn-danger-outline" id="adminLogoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+
+                <form id="cmsForm" class="cms-form">
+                    <div class="form-group">
+                        <label><i class="fas fa-question-circle"></i> Question</label>
+                        <input type="text" id="questionInput" placeholder="Enter your question..." required>
+                    </div>
+
+                    <!-- Class & Department Selection -->
+                    <div class="form-group">
+                        <label><i class="fas fa-graduation-cap"></i> Class & Department</label>
+                        <div class="admin-select-group">
+                            <select id="classSelectAdmin">
+                                <option value="all">All Classes</option>
+                                <option value="9">Class 9</option>
+                                <option value="10">Class 10</option>
+                                <option value="ba">BA</option>
+                            </select>
+                            <select id="deptSelectAdmin">
+                                <option value="all">All Departments</option>
+                                <option value="political-science">Political Science</option>
+                                <option value="education">Education</option>
+                                <option value="history">History</option>
+                                <option value="philosophy">Philosophy</option>
+                                <option value="sociology">Sociology</option>
+                                <option value="economics">Economics</option>
+                                <option value="english">English</option>
+                                <option value="assamese">Assamese</option>
+                                <option value="bodo">Bodo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="optionsGroup">
+                        <label><i class="fas fa-list"></i> Options <span style="font-weight:400;font-size:0.7rem;color:var(--text-secondary);">(check correct)</span></label>
+                        <div class="options-grid">
+                            <div class="option-input-group">
+                                <span class="opt-label">A</span>
+                                <input type="text" id="opt1" placeholder="Option A" class="opt-input">
+                                <input type="checkbox" id="opt1Correct" class="correct-check" title="Mark as correct">
+                            </div>
+                            <div class="option-input-group">
+                                <span class="opt-label">B</span>
+                                <input type="text" id="opt2" placeholder="Option B" class="opt-input">
+                                <input type="checkbox" id="opt2Correct" class="correct-check" title="Mark as correct">
+                            </div>
+                            <div class="option-input-group">
+                                <span class="opt-label">C</span>
+                                <input type="text" id="opt3" placeholder="Option C" class="opt-input">
+                                <input type="checkbox" id="opt3Correct" class="correct-check" title="Mark as correct">
+                            </div>
+                            <div class="option-input-group">
+                                <span class="opt-label">D</span>
+                                <input type="text" id="opt4" placeholder="Option D" class="opt-input">
+                                <input type="checkbox" id="opt4Correct" class="correct-check" title="Mark as correct">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="answerGroup" style="display:none;">
+                        <label><i class="fas fa-check-circle"></i> Answer</label>
+                        <input type="text" id="answerInput" placeholder="Enter the answer...">
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-palette"></i> Styling</label>
+                        <div class="toolbar">
+                            <button type="button" class="tool-btn" id="boldBtn"><i class="fas fa-bold"></i></button>
+                            <button type="button" class="tool-btn" id="italicBtn"><i class="fas fa-italic"></i></button>
+                            <button type="button" class="tool-btn" id="highlightBtn"><i class="fas fa-highlighter"></i></button>
+                            <div class="color-picker-wrap">
+                                <i class="fas fa-palette" style="color:var(--text-secondary);font-size:0.8rem;"></i>
+                                <input type="color" id="colorPicker" value="#0d9488">
+                            </div>
+                            <select id="classSelect" style="padding:2px 10px; border-radius:30px; border:1px solid var(--border-color); background:var(--card-bg); color:var(--text-primary); font-size:0.7rem;">
+                                <option value="">class</option>
+                                <option value="highlight-bg">highlight</option>
+                                <option value="bold-text">bold</option>
+                                <option value="italic-text">italic</option>
+                                <option value="text-green">green</option>
+                                <option value="text-cyan">cyan</option>
+                                <option value="text-yellow">yellow</option>
+                                <option value="text-blue">blue</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success" id="submitBtn"><i class="fas fa-plus-circle"></i> Add</button>
+                        <button type="button" class="btn btn-outline" id="cancelEditBtn"><i class="fas fa-times"></i> Cancel</button>
+                    </div>
+                    <input type="hidden" id="editId" value="">
+                    <input type="hidden" id="questionType" value="mcq">
+                </form>
+
+                <div class="question-list-container">
+                    <div class="question-list-header">
+                        <span><i class="fas fa-list"></i> All Questions</span>
+                        <span class="question-count-badge" id="questionCount">0</span>
+                    </div>
+                    <div id="questionListContainer" class="question-list"></div>
+                </div>
+            </div>
+
+            <button id="closeAdminPanelBtn" style="margin-top: 12px; padding: 8px 20px; border: none; border-radius: 40px; background: var(--danger); color: white; font-weight: 600; cursor: pointer; width: 100%; transition: all 0.2s;">Close Panel</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js">
+    </script>
+
+    <script>
+        // ============================================
+        // FIREBASE CONFIG
+        // ============================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyBUarXDFT7Wi5pJOLqfrxO7D-zV0jTb10A",
+            authDomain: "qna-website-74f5d.firebaseapp.com",
+            projectId: "qna-website-74f5d",
+            storageBucket: "qna-website-74f5d.firebasestorage.app",
+            messagingSenderId: "159781073572",
+            appId: "1:159781073572:web:ced94be41907b5375a2c31",
+            measurementId: "G-73JY028PVN"
+        };
+
+        let useFirebase = false;
+        let db = null;
+        let auth = null;
+        let currentUser = null;
+        let isDataLoaded = false;
+
+        try {
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+            auth = firebase.auth();
+            db = firebase.firestore();
+            useFirebase = true;
+            console.log('✅ Firebase connected successfully!');
+        } catch (e) {
+            console.warn('⚠️ Firebase connection failed. Using local storage only.', e);
+            useFirebase = false;
+        }
+
+        // ============================================
+        // DOM ELEMENTS
+        // ============================================
+        const liveFeed = document.getElementById('liveFeed');
+        const questionListContainer = document.getElementById('questionListContainer');
+        const questionCount = document.getElementById('questionCount');
+        const questionInput = document.getElementById('questionInput');
+        const answerInput = document.getElementById('answerInput');
+        const optInputs = document.querySelectorAll('.opt-input');
+        const correctChecks = document.querySelectorAll('.correct-check');
+        const boldBtn = document.getElementById('boldBtn');
+        const italicBtn = document.getElementById('italicBtn');
+        const highlightBtn = document.getElementById('highlightBtn');
+        const colorPicker = document.getElementById('colorPicker');
+        const classSelect = document.getElementById('classSelect');
+        const classSelectAdmin = document.getElementById('classSelectAdmin');
+        const deptSelectAdmin = document.getElementById('deptSelectAdmin');
+        const submitBtn = document.getElementById('submitBtn');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+        const editIdInput = document.getElementById('editId');
+        const questionTypeInput = document.getElementById('questionType');
+        const adminToggleBtn = document.getElementById('adminToggleBtn');
+        const adminPanelModal = document.getElementById('adminPanelModal');
+        const adminLoginSection = document.getElementById('adminLoginSection');
+        const adminContent = document.getElementById('adminContent');
+        const adminEmail = document.getElementById('adminEmail');
+        const adminPassword = document.getElementById('adminPassword');
+        const adminLoginBtn = document.getElementById('adminLoginBtn');
+        const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+        const loginError = document.getElementById('loginError');
+        const loginSuccess = document.getElementById('loginSuccess');
+        const darkToggle = document.getElementById('darkModeToggle');
+        const visitorCountEl = document.getElementById('visitorCount');
+        const mcqViewBtn = document.getElementById('mcqViewBtn');
+        const qaViewBtn = document.getElementById('qaViewBtn');
+        const allViewBtn = document.getElementById('allViewBtn');
+        const addMCQBtn = document.getElementById('addMCQBtn');
+        const addQABtn = document.getElementById('addQABtn');
+        const clearAllBtn = document.getElementById('clearAllBtn');
+        const optionsGroup = document.getElementById('optionsGroup');
+        const answerGroup = document.getElementById('answerGroup');
+        const closeAdminBtn = document.getElementById('closeAdminPanelBtn');
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearSearchBtn');
+        const searchStats = document.getElementById('searchStats');
+        const classFilterButtons = document.getElementById('classFilterButtons');
+        const deptFilterButtons = document.getElementById('deptFilterButtons');
+        const deptFilterContainer = document.getElementById('deptFilterContainer');
+        const activeFilterDisplay = document.getElementById('activeFilterDisplay');
+
+        // ============================================
+        // STATE
+        // ============================================
+        let questions = [];
+        let editingId = null;
+        let isAdmin = false;
+        let currentView = 'mcq';
+        let selectedClass = 'all';
+        let selectedDept = 'all';
+        let questionCounter = 0;
+
+        // ============================================
+        // DARK MODE
+        // ============================================
+        darkToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            this.innerHTML = isDark ? '☀️' : '🌙';
+            localStorage.setItem('darkMode', isDark);
+        });
+
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark');
+            darkToggle.innerHTML = '☀️';
+        }
+
+        // ============================================
+        // CLASS FILTER
+        // ============================================
+        classFilterButtons.addEventListener('click', function(e) {
+            const btn = e.target.closest('.class-btn');
+            if (!btn) return;
+
+            classFilterButtons.querySelectorAll('.class-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            selectedClass = btn.dataset.class;
+
+            if (selectedClass === 'ba') {
+                deptFilterContainer.style.display = 'block';
+            } else {
+                deptFilterContainer.style.display = 'none';
+                selectedDept = 'all';
+                deptFilterButtons.querySelectorAll('.class-btn').forEach(b => b.classList.remove('active'));
+                deptFilterButtons.querySelector('[data-dept="all"]').classList.add('active');
+            }
+
+            updateActiveFilterDisplay();
+            renderAll();
+        });
+
+        deptFilterButtons.addEventListener('click', function(e) {
+            const btn = e.target.closest('.class-btn');
+            if (!btn) return;
+
+            deptFilterButtons.querySelectorAll('.class-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            selectedDept = btn.dataset.dept;
+            updateActiveFilterDisplay();
+            renderAll();
+        });
+
+        function updateActiveFilterDisplay() {
+            let display = 'All';
+            if (selectedClass !== 'all') {
+                display = selectedClass.toUpperCase();
+                if (selectedClass === 'ba' && selectedDept !== 'all') {
+                    const deptName = selectedDept.replace(/-/g, ' ').toUpperCase();
+                    display = `BA - ${deptName}`;
+                }
+            }
+            activeFilterDisplay.textContent = display;
+        }
+
+        // ============================================
+        // ADMIN PANEL TOGGLE
+        // ============================================
+        adminToggleBtn.addEventListener('click', function() {
+            adminPanelModal.classList.toggle('active');
+            if (adminPanelModal.classList.contains('active')) {
+                this.classList.add('unlocked');
+                this.innerHTML = '<i class="fas fa-lock-open lock-icon"></i> Admin';
+                if (!isAdmin) {
+                    adminLoginSection.style.display = 'block';
+                    adminContent.classList.remove('active');
+                }
+            } else {
+                this.classList.remove('unlocked');
+                this.innerHTML = '<i class="fas fa-lock lock-icon"></i> Admin';
+            }
+        });
+
+        closeAdminBtn.addEventListener('click', function() {
+            adminPanelModal.classList.remove('active');
+            adminToggleBtn.classList.remove('unlocked');
+            adminToggleBtn.innerHTML = '<i class="fas fa-lock lock-icon"></i> Admin';
+        });
+
+        adminPanelModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                adminPanelModal.classList.remove('active');
+                adminToggleBtn.classList.remove('unlocked');
+                adminToggleBtn.innerHTML = '<i class="fas fa-lock lock-icon"></i> Admin';
+            }
+        });
+
+        // ============================================
+        // VIEW TOGGLE
+        // ============================================
+        function setView(view) {
+            currentView = view;
+            liveFeed.classList.remove('mcq-view', 'qa-view', 'all-view');
+            mcqViewBtn.classList.remove('active');
+            qaViewBtn.classList.remove('active');
+            allViewBtn.classList.remove('active');
+
+            if (view === 'mcq') {
+                liveFeed.classList.add('mcq-view');
+                mcqViewBtn.classList.add('active');
+            } else if (view === 'qa') {
+                liveFeed.classList.add('qa-view');
+                qaViewBtn.classList.add('active');
+            } else {
+                liveFeed.classList.add('all-view');
+                allViewBtn.classList.add('active');
+            }
+            renderAll();
+        }
+
+        mcqViewBtn.addEventListener('click', function() { setView('mcq'); });
+        qaViewBtn.addEventListener('click', function() { setView('qa'); });
+        allViewBtn.addEventListener('click', function() { setView('all'); });
+
+        // ============================================
+        // ADMIN LOGIN - Firebase Authentication
+        // ============================================
+        adminLoginBtn.addEventListener('click', function() {
+            const email = adminEmail.value.trim();
+            const password = adminPassword.value.trim();
+
+            if (!email || !password) {
+                loginError.textContent = '❌ Please enter email and password';
+                return;
+            }
+
+            if (useFirebase && auth) {
+                adminLoginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+                adminLoginBtn.disabled = true;
+
+                auth.signInWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        currentUser = userCredential.user;
+                        loginError.textContent = '';
+                        loginSuccess.textContent = '✅ Login successful! Welcome Admin.';
+                        isAdmin = true;
+                        adminLoginSection.style.display = 'none';
+                        adminContent.classList.add('active');
+                        adminToggleBtn.classList.add('unlocked');
+                        adminToggleBtn.innerHTML = '<i class="fas fa-lock-open lock-icon"></i> Admin';
+                        adminLoginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign in with Firebase';
+                        adminLoginBtn.disabled = false;
+                        loadData();
+                        renderAll();
+                    })
+                    .catch((error) => {
+                        loginError.textContent = '❌ ' + error.message;
+                        loginSuccess.textContent = '';
+                        isAdmin = false;
+                        adminLoginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign in with Firebase';
+                        adminLoginBtn.disabled = false;
+                    });
+            } else {
+                loginError.textContent = '❌ Firebase not available. Please check your connection.';
+                loginSuccess.textContent = '';
+                isAdmin = false;
+            }
+        });
+
+        adminEmail.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') adminLoginBtn.click();
+        });
+        adminPassword.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') adminLoginBtn.click();
+        });
+
+        // ============================================
+        // ADMIN LOGOUT
+        // ============================================
+        adminLogoutBtn.addEventListener('click', function() {
+            if (useFirebase && auth) {
+                auth.signOut().then(() => {
+                    currentUser = null;
+                    isAdmin = false;
+                    adminLoginSection.style.display = 'block';
+                    adminContent.classList.remove('active');
+                    adminToggleBtn.classList.remove('unlocked');
+                    adminToggleBtn.innerHTML = '<i class="fas fa-lock lock-icon"></i> Admin';
+                    loginSuccess.textContent = '✅ Logged out successfully';
+                    loginError.textContent = '';
+                    resetForm();
+                    renderAll();
+                }).catch((error) => {
+                    loginError.textContent = '❌ ' + error.message;
+                });
+            } else {
+                currentUser = null;
+                isAdmin = false;
+                adminLoginSection.style.display = 'block';
+                adminContent.classList.remove('active');
+                adminToggleBtn.classList.remove('unlocked');
+                adminToggleBtn.innerHTML = '<i class="fas fa-lock lock-icon"></i> Admin';
+                loginSuccess.textContent = '✅ Logged out successfully';
+                loginError.textContent = '';
+                resetForm();
+                renderAll();
+            }
+        });
+
+        // ============================================
+        // FIREBASE AUTH STATE LISTENER
+        // ============================================
+        if (useFirebase && auth) {
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    currentUser = user;
+                    isAdmin = true;
+                    adminLoginSection.style.display = 'none';
+                    adminContent.classList.add('active');
+                    adminToggleBtn.classList.add('unlocked');
+                    adminToggleBtn.innerHTML = '<i class="fas fa-lock-open lock-icon"></i> Admin';
+                    loadData();
+                } else {
+                    currentUser = null;
+                    isAdmin = false;
+                    adminLoginSection.style.display = 'block';
+                    adminContent.classList.remove('active');
+                    adminToggleBtn.classList.remove('unlocked');
+                    adminToggleBtn.innerHTML = '<i class="fas fa-lock lock-icon"></i> Admin';
+                    loadData();
+                }
+            });
+        }
+
+        // ============================================
+        // ADMIN ACTIONS
+        // ============================================
+        addMCQBtn.addEventListener('click', function() {
+            if (!isAdmin) { alert('Please login first'); return; }
+            questionTypeInput.value = 'mcq';
+            optionsGroup.style.display = 'block';
+            answerGroup.style.display = 'none';
+            resetForm();
+            questionInput.focus();
+        });
+
+        addQABtn.addEventListener('click', function() {
+            if (!isAdmin) { alert('Please login first'); return; }
+            questionTypeInput.value = 'qa';
+            optionsGroup.style.display = 'none';
+            answerGroup.style.display = 'block';
+            resetForm();
+            questionInput.focus();
+        });
+
+        clearAllBtn.addEventListener('click', function() {
+            if (!isAdmin) { alert('Please login first'); return; }
+            if (!confirm('Delete ALL questions? This action cannot be undone!')) return;
+            if (useFirebase && db) {
+                questions.forEach(q => {
+                    db.collection('questions').doc(q.id).delete().catch(console.warn);
+                });
+            }
+            questions = [];
+            questionCounter = 0;
+            renderAll();
+        });
+
+        // ============================================
+        // TOOLBAR BUTTONS
+        // ============================================
+        boldBtn.addEventListener('click', function() { this.classList.toggle('active'); });
+        italicBtn.addEventListener('click', function() { this.classList.toggle('active'); });
+        highlightBtn.addEventListener('click', function() { this.classList.toggle('active'); });
+
+        cancelEditBtn.addEventListener('click', resetForm);
+
+        // ============================================
+        // HELPERS
+        // ============================================
+        function buildStyledText(text, bold, italic, highlight, color, cls) {
+            let w = text;
+            if (bold) w = `<span class="bold-text">${w}</span>`;
+            if (italic) w = `<span class="italic-text">${w}</span>`;
+            if (highlight) w = `<span class="highlight-bg">${w}</span>`;
+            if (color && color !== '#000000' && color !== '#0d9488' && color !== '#') {
+                w = `<span style="color:${color};">${w}</span>`;
+            }
+            if (cls) w = `<span class="${cls}">${w}</span>`;
+            return w;
+        }
+
+        function getOptionsFromForm() {
+            const opts = [];
+            const correctIndices = [];
+            optInputs.forEach((inp, i) => {
+                if (inp.value.trim()) {
+                    opts.push(inp.value.trim());
+                    if (correctChecks[i].checked) correctIndices.push(i);
+                }
+            });
+            return { options: opts, correct: correctIndices };
+        }
+
+        function setOptionsToForm(options, correctIndices) {
+            optInputs.forEach((inp, i) => {
+                inp.value = options[i] || '';
+                correctChecks[i].checked = correctIndices && correctIndices.includes(i);
+            });
+        }
+
+        function resetOptionsForm() {
+            optInputs.forEach(inp => inp.value = '');
+            correctChecks.forEach(chk => chk.checked = false);
+        }
+
+        function getLabel(index) {
+            return String.fromCharCode(65 + index);
+        }
+
+        function getQuestionType(q) {
+            if (q.options && q.options.length > 0) return 'mcq';
+            return 'qa';
+        }
+
+        function filterQuestions(searchTerm, list) {
+            if (!searchTerm.trim()) return list;
+            const term = searchTerm.toLowerCase().trim();
+            return list.filter(q =>
+                q.text.toLowerCase().includes(term) ||
+                (q.options && q.options.some(opt => opt.toLowerCase().includes(term))) ||
+                (q.answer && q.answer.toLowerCase().includes(term))
+            );
+        }
+
+        function resetForm() {
+            questionInput.value = '';
+            boldBtn.classList.remove('active');
+            italicBtn.classList.remove('active');
+            highlightBtn.classList.remove('active');
+            colorPicker.value = '#0d9488';
+            classSelect.value = '';
+            resetOptionsForm();
+            answerInput.value = '';
+            editIdInput.value = '';
+            submitBtn.innerHTML = '<i class="fas fa-plus-circle"></i> Add';
+            editingId = null;
+            if (questionTypeInput.value === 'mcq') {
+                optionsGroup.style.display = 'block';
+                answerGroup.style.display = 'none';
+            }
+        }
+
+        // ============================================
+        // RENDER - Fast rendering
+        // ============================================
+        function renderAll() {
+            const searchTerm = searchInput.value;
+            let filtered = filterQuestions(searchTerm, questions);
+
+            // Filter by class
+            if (selectedClass !== 'all') {
+                filtered = filtered.filter(q => q.classTag === selectedClass);
+            }
+
+            // Filter by department
+            if (selectedClass === 'ba' && selectedDept !== 'all') {
+                filtered = filtered.filter(q => q.department === selectedDept);
+            }
+
+            const showMCQ = (currentView === 'mcq' || currentView === 'all');
+            const showQA = (currentView === 'qa' || currentView === 'all');
+
+            // Fast rendering with document fragment approach
+            if (filtered.length === 0) {
+                liveFeed.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-book-open"></i>
+                            <div>${questions.length === 0 ? 'No questions yet' : 'No matching questions'}</div>
+                            <div style="font-size:0.85rem;margin-top:4px;">${questions.length === 0 ? 'Check back later!' : 'Try adjusting filters or search'}</div>
+                        </div>
+                    `;
+            } else {
+                let html = '';
+                const sortedForDisplay = [...filtered].reverse();
+                sortedForDisplay.forEach((q, displayIndex) => {
+                    const isMCQ = q.options && q.options.length > 0;
+                    if (isMCQ && !showMCQ) return;
+                    if (!isMCQ && !showQA) return;
+
+                    const serialNumber = q.serialNumber || (filtered.length - displayIndex);
+                    const styledQ = buildStyledText(q.text, q.bold, q.italic, q.highlight, q.color, q.class);
+                    const cardClass = isMCQ ? 'mcq-card' : 'qa-card';
+
+                    let optsHtml = '';
+                    let answerHtml = '';
+
+                    if (isMCQ) {
+                        optsHtml = '<div class="options-list">';
+                        q.options.forEach((opt, idx) => {
+                            const isCorrect = q.correct && q.correct.includes(idx);
+                            optsHtml += `
+                                    <div class="option-item ${isCorrect ? 'correct' : ''}">
+                                        <span class="opt-label">${getLabel(idx)}.</span>
+                                        ${opt}
+                                        ${isCorrect ? '<span class="check-mark">✅</span>' : ''}
+                                    </div>
+                                `;
+                        });
+                        optsHtml += '</div>';
+
+                        const correctText = q.correct && q.correct.length > 0 ?
+                            q.correct.map(idx => `${getLabel(idx)}. ${q.options[idx]}`).join(', ') :
+                            'Not specified';
+                        answerHtml = `
+                                <div class="answer-section">
+                                    <span class="answer-label"><i class="fas fa-check-circle"></i> Answer:</span>
+                                    <span class="answer-text">${correctText}</span>
+                                </div>
+                            `;
+                    } else {
+                        if (q.answer) {
+                            answerHtml = `
+                                <div class="answer-section">
+                                    <span class="answer-label"><i class="fas fa-check-circle"></i> Answer:</span>
+                                    <span class="answer-text">${q.answer}</span>
+                                </div>
+                            `;
+                        }
+                    }
+
+                    const time = q.updatedAt ? new Date(q.updatedAt).toLocaleTimeString() : new Date().toLocaleTimeString();
+                    const typeLabel = isMCQ ? 'MCQ' : 'Q&A';
+                    const classTag = q.classTag || 'all';
+                    const deptName = q.department || '';
+
+                    let deptDisplay = '';
+                    if (deptName && deptName !== 'all') {
+                        deptDisplay = `<span class="dept-tag">${deptName.replace(/-/g, ' ').toUpperCase()}</span>`;
+                    }
+
+                    html += `
+                            <div class="live-card ${cardClass}">
+                                <div class="question-number">
+                                    <span class="num-badge">Q${serialNumber}</span>
+                                    <span style="color:var(--text-secondary);">${typeLabel}</span>
+                                    ${classTag !== 'all' ? `<span class="class-tag">${classTag.toUpperCase()}</span>` : ''}
+                                    ${deptDisplay}
+                                </div>
+                                <div class="question-text">${styledQ}</div>
+                                ${optsHtml}
+                                ${answerHtml}
+                                <div class="meta">
+                                    <span><i class="far fa-clock"></i> ${time}</span>
+                                    <span><i class="fas fa-tag"></i> ${typeLabel}</span>
+                                </div>
+                            </div>
+                        `;
+                });
+
+                if (html === '') {
+                    liveFeed.innerHTML = `
+                            <div class="empty-state">
+                                <i class="fas fa-filter"></i>
+                                <div>No ${currentView === 'mcq' ? 'MCQ' : 'Q&A'} questions match your filters</div>
+                                <div style="font-size:0.85rem;margin-top:4px;">Try switching views or clearing filters</div>
+                            </div>
+                        `;
+                } else {
+                    liveFeed.innerHTML = html;
+                }
+            }
+
+            const totalVisible = document.querySelectorAll('.live-card:not([style*="display: none"])').length;
+            searchStats.textContent = `${totalVisible} of ${questions.length} questions`;
+
+            // Admin list - fast render
+            if (isAdmin) {
+                if (questions.length === 0) {
+                    questionListContainer.innerHTML = `
+                            <div class="empty-state" style="padding:20px 10px;">
+                                <i class="fas fa-inbox" style="font-size:1.5rem;"></i>
+                                <div style="font-size:0.85rem;">No questions</div>
+                            </div>
+                        `;
+                } else {
+                    let html = '';
+                    questions.forEach((q) => {
+                        const preview = q.text.length > 40 ? q.text.substr(0, 40) + '…' : q.text;
+                        const styled = buildStyledText(preview, q.bold, q.italic, q.highlight, q.color, q.class);
+                        const type = getQuestionType(q);
+                        const classTag = q.classTag || 'all';
+                        const serial = q.serialNumber || '?';
+                        html += `
+                                <div class="question-item" data-id="${q.id}">
+                                    <div class="q-text">#${serial} ${styled} <span style="font-size:0.65rem;color:var(--text-secondary);">[${type}] ${classTag !== 'all' ? '📚'+classTag.toUpperCase() : ''}</span></div>
+                                    <div class="q-actions">
+                                        <button class="edit-btn" data-id="${q.id}" title="Edit"><i class="fas fa-pen"></i></button>
+                                        <button class="delete-btn" data-id="${q.id}" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                </div>
+                            `;
+                    });
+                    questionListContainer.innerHTML = html;
+
+                    document.querySelectorAll('.edit-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const q = questions.find(q => q.id === this.dataset.id);
+                            if (q) loadToForm(q);
+                        });
+                    });
+                    document.querySelectorAll('.delete-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            deleteQuestion(this.dataset.id);
+                        });
+                    });
+                }
+                questionCount.textContent = questions.length;
+            }
+        }
+
+        // ============================================
+        // CRUD OPERATIONS
+        // ============================================
+        document.getElementById('cmsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (!isAdmin) { alert('Please login first'); return; }
+
+            const text = questionInput.value.trim();
+            if (!text) {
+                alert('Please enter a question');
+                return;
+            }
+
+            const type = questionTypeInput.value;
+            let options = [],
+                correct = [],
+                answer = '';
+
+            if (type === 'mcq') {
+                const result = getOptionsFromForm();
+                options = result.options;
+                correct = result.correct;
+                if (options.length < 2) {
+                    alert('Please add at least 2 options');
+                    return;
+                }
+                if (correct.length === 0) {
+                    alert('Please mark the correct answer');
+                    return;
+                }
+            } else {
+                answer = answerInput.value.trim();
+                if (!answer) {
+                    alert('Please enter an answer');
+                    return;
+                }
+            }
+
+            const bold = boldBtn.classList.contains('active');
+            const italic = italicBtn.classList.contains('active');
+            const highlight = highlightBtn.classList.contains('active');
+            const color = colorPicker.value;
+            const cls = classSelect.value;
+            const classTag = classSelectAdmin.value;
+            const department = deptSelectAdmin.value;
+
+            const editId = editIdInput.value;
+            questionCounter = questions.length + 1;
+
+            const data = {
+                text,
+                bold,
+                italic,
+                highlight,
+                color,
+                class: cls,
+                classTag: classTag,
+                department: department,
+                options,
+                correct,
+                answer,
+                type,
+                serialNumber: questionCounter,
+                updatedAt: Date.now()
+            };
+
+            if (editId) {
+                const idx = questions.findIndex(q => q.id === editId);
+                if (idx !== -1) {
+                    questions[idx] = { ...questions[idx], ...data };
+                    if (useFirebase && db) {
+                        db.collection('questions').doc(editId).update(data).catch(console.warn);
+                    }
+                }
+                resetForm();
+            } else {
+                const newQ = { id: Date.now().toString(36) + Math.random().toString(36).substr(2, 4), ...data };
+                questions.push(newQ);
+                if (useFirebase && db) {
+                    db.collection('questions').doc(newQ.id).set(newQ).catch(console.warn);
+                }
+                resetForm();
+            }
+            renderAll();
+            questionInput.focus();
+        });
+
+        function deleteQuestion(id) {
+            if (!isAdmin) { alert('Please login first'); return; }
+            if (!confirm('Delete this question?')) return;
+            questions = questions.filter(q => q.id !== id);
+            if (useFirebase && db) {
+                db.collection('questions').doc(id).delete().catch(console.warn);
+            }
+            if (editingId === id) resetForm();
+            questions.forEach((q, index) => {
+                q.serialNumber = index + 1;
+            });
+            renderAll();
+        }
+
+        function loadToForm(q) {
+            if (!isAdmin) { alert('Please login first'); return; }
+            questionInput.value = q.text;
+            boldBtn.classList.toggle('active', q.bold);
+            italicBtn.classList.toggle('active', q.italic);
+            highlightBtn.classList.toggle('active', q.highlight);
+            colorPicker.value = q.color || '#0d9488';
+            classSelect.value = q.class || '';
+            classSelectAdmin.value = q.classTag || 'all';
+            deptSelectAdmin.value = q.department || 'all';
+
+            const type = getQuestionType(q);
+            questionTypeInput.value = type;
+
+            if (type === 'mcq') {
+                optionsGroup.style.display = 'block';
+                answerGroup.style.display = 'none';
+                setOptionsToForm(q.options || [], q.correct || []);
+                answerInput.value = '';
+            } else {
+                optionsGroup.style.display = 'none';
+                answerGroup.style.display = 'block';
+                resetOptionsForm();
+                answerInput.value = q.answer || '';
+            }
+
+            editIdInput.value = q.id;
+            submitBtn.innerHTML = '<i class="fas fa-save"></i> Update';
+            editingId = q.id;
+        }
+
+        // ============================================
+        // SEARCH - Fast response
+        // ============================================
+        searchInput.addEventListener('input', function() {
+            clearBtn.classList.toggle('visible', this.value.length > 0);
+            renderAll();
+        });
+
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            this.classList.remove('visible');
+            renderAll();
+        });
+
+        // ============================================
+        // VISITOR COUNTER
+        // ============================================
+        function updateVisitorCount() {
+            let count = parseInt(localStorage.getItem('visitorCount') || '0');
+            if (!localStorage.getItem('visitorId')) {
+                localStorage.setItem('visitorId', 'visitor_' + Date.now());
+                count++;
+                localStorage.setItem('visitorCount', count);
+            }
+            visitorCountEl.textContent = count;
+        }
+
+        // ============================================
+        // LOAD DATA - Fast loading
+        // ============================================
+        function loadData() {
+            if (useFirebase && db) {
+                db.collection('questions').orderBy('updatedAt', 'desc').get()
+                    .then(snapshot => {
+                        if (!snapshot.empty) {
+                            questions = [];
+                            snapshot.forEach(doc => {
+                                questions.push({ id: doc.id, ...doc.data() });
+                            });
+                            questions.forEach((q, index) => {
+                                if (!q.serialNumber) {
+                                    q.serialNumber = index + 1;
+                                }
+                            });
+                            questionCounter = questions.length;
+                        } else {
+                            seedLocalData();
+                        }
+                        isDataLoaded = true;
+                        renderAll();
+                    })
+                    .catch(() => {
+                        seedLocalData();
+                        isDataLoaded = true;
+                        renderAll();
+                    });
+            } else {
+                seedLocalData();
+                isDataLoaded = true;
+                renderAll();
+            }
+        }
+
+        function seedLocalData() {
+            if (questions.length === 0) {
+                questions = [
+                    { id: '1', text: 'What is the capital of France?', bold: true, italic: false, highlight: false,
+                        color: '#0d9488', class: '', classTag: '9', department: 'all',
+                        options: ['London', 'Paris', 'Berlin', 'Madrid'], correct: [1],
+                        answer: '', type: 'mcq', serialNumber: 1, updatedAt: Date.now() - 3600000 },
+                    { id: '2', text: 'Which planet is known as the Red Planet?', bold: false, italic: false,
+                        highlight: true, color: '#b45309', class: 'highlight-bg', classTag: '10', department: 'all',
+                        options: ['Venus', 'Mars', 'Jupiter', 'Saturn'], correct: [1],
+                        answer: '', type: 'mcq', serialNumber: 2, updatedAt: Date.now() - 1800000 },
+                    { id: '3', text: 'Who is the father of Political Science?', bold: false, italic: true,
+                        highlight: false, color: '#16a34a', class: 'text-green', classTag: 'ba', department: 'political-science',
+                        options: ['Plato', 'Aristotle', 'Socrates', 'Machiavelli'], correct: [1],
+                        answer: '', type: 'mcq', serialNumber: 3, updatedAt: Date.now() - 1200000 },
+                    { id: '4', text: 'What is the chemical symbol for water?', bold: false, italic: true,
+                        highlight: false, color: '#16a34a', class: 'text-green', classTag: '9', department: 'all',
+                        options: [], correct: [],
+                        answer: 'H₂O (Hydrogen dioxide)', type: 'qa', serialNumber: 4, updatedAt: Date.now() - 600000 },
+                    { id: '5', text: 'Who wrote "The Republic"?', bold: false, italic: false,
+                        highlight: false, color: '#0891b2', class: 'text-cyan', classTag: 'ba', department: 'philosophy',
+                        options: ['Plato', 'Aristotle', 'Socrates', 'Cicero'], correct: [0],
+                        answer: '', type: 'mcq', serialNumber: 5, updatedAt: Date.now() - 300000 }
+                ];
+                questionCounter = questions.length;
+            }
+        }
+
+        // ============================================
+        // FIREBASE REALTIME LISTENER - Fast updates
+        // ============================================
+        if (useFirebase && db) {
+            db.collection('questions').onSnapshot(snapshot => {
+                if (snapshot) {
+                    const newQs = [];
+                    snapshot.forEach(doc => {
+                        newQs.push({ id: doc.id, ...doc.data() });
+                    });
+                    if (newQs.length > 0) {
+                        questions = newQs;
+                        questions.forEach((q, index) => {
+                            if (!q.serialNumber) {
+                                q.serialNumber = index + 1;
+                            }
+                        });
+                        questionCounter = questions.length;
+                        if (isDataLoaded) {
+                            renderAll();
+                        }
+                    }
+                }
+            }, err => console.warn('Realtime error:', err));
+        }
+
+        // ============================================
+        // INITIALIZE
+        // ============================================
+        deptFilterContainer.style.display = 'none';
+        updateActiveFilterDisplay();
+
+        setView('mcq');
+        updateVisitorCount();
+        loadData();
+        console.log('✅ Q&A MCQ Pro ready! Click Admin button to manage.');
+        console.log('🔑 Use your Firebase Email & Password to login as Admin.');
+        console.log('📝 Questions are numbered sequentially: 1, 2, 3, ...');
+        console.log('⚡ Fast loading & smooth animations enabled!');
+    </script>
+
+</body>
+</html>
