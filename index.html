@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- same polished style, only class filter expanded to 1–12 --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --card-bg: rgba(255,255,255,0.92);
@@ -234,7 +233,7 @@
             <div class="desc">🌈 Premium Q&A system with multiple-choice questions, real-time updates, and admin controls 🌈</div>
         </div>
 
-        <!-- Class Filter Section: classes 1 to 12 displayed serially -->
+        <!-- Class Filter Section: All classes 1–12 + BA semesters -->
         <div class="class-filter-section">
             <div class="class-filter-title">
                 <i class="fas fa-graduation-cap"></i> Classes
@@ -244,18 +243,26 @@
                 <span class="filter-label">Class:</span>
                 <div class="class-buttons" id="classFilterButtons">
                     <button class="class-btn active" data-class="all">All</button>
+                    <button class="class-btn" data-class="1">Class 1</button>
+                    <button class="class-btn" data-class="2">Class 2</button>
+                    <button class="class-btn" data-class="3">Class 3</button>
+                    <button class="class-btn" data-class="4">Class 4</button>
+                    <button class="class-btn" data-class="5">Class 5</button>
+                    <button class="class-btn" data-class="6">Class 6</button>
+                    <button class="class-btn" data-class="7">Class 7</button>
+                    <button class="class-btn" data-class="8">Class 8</button>
                     <button class="class-btn" data-class="9">Class 9</button>
                     <button class="class-btn" data-class="10">Class 10</button>
-                    <button class="class-btn" data-BA="1st">BA 1st Sem</button>
-                    <button class="class-btn" data-BA="2nd">BA 2nd</button>
-                    <button class="class-btn" data-BA="3rd">BA 3rd</button>
-                    <button class="class-btn" data-BA="4th">BA 4th</button>
-                    <button class="class-btn" data-BA="5th">BA 5th</button>
-                    <button class="class-btn" data-BA="6th">BA 6th</button>
-                    <button class="class-btn" data-BA="7th">BA 7th</button>
-                    <button class="class-btn" data-BA="8th">BA 8th</button>
                     <button class="class-btn" data-class="11">Class 11</button>
                     <button class="class-btn" data-class="12">Class 12</button>
+                    <button class="class-btn" data-class="ba-1st">BA 1st Sem</button>
+                    <button class="class-btn" data-class="ba-2nd">BA 2nd Sem</button>
+                    <button class="class-btn" data-class="ba-3rd">BA 3rd Sem</button>
+                    <button class="class-btn" data-class="ba-4th">BA 4th Sem</button>
+                    <button class="class-btn" data-class="ba-5th">BA 5th Sem</button>
+                    <button class="class-btn" data-class="ba-6th">BA 6th Sem</button>
+                    <button class="class-btn" data-class="ba-7th">BA 7th Sem</button>
+                    <button class="class-btn" data-class="ba-8th">BA 8th Sem</button>
                 </div>
             </div>
         </div>
@@ -343,23 +350,31 @@
                         <label><i class="fas fa-question-circle"></i> Question</label>
                         <input type="text" id="questionInput" placeholder="Enter your question..." required>
                     </div>
-                    <!-- Only class selection, 1–12 -->
+                    <!-- Class selection with all options -->
                     <div class="form-group">
                         <label><i class="fas fa-graduation-cap"></i> Class</label>
                         <select id="classSelectAdmin">
                             <option value="all">All Classes</option>
-                            <option value="1">Class 9</option>
-                            <option value="2">Class 10</option>
-                            <option value="1st">BA 1st Sem</option>
-                            <option value="2nd">BA 2nd</option>
-                            <option value="3rd">BA 3rd</option>
-                            <option value="4th">BA 4th</option>
-                            <option value="5th">BA 5th</option>
-                            <option value="6th">BA 6th</option>
-                            <option value="7th">BA 7th</option>
-                            <option value="8th">BA 8th</option>
+                            <option value="1">Class 1</option>
+                            <option value="2">Class 2</option>
+                            <option value="3">Class 3</option>
+                            <option value="4">Class 4</option>
+                            <option value="5">Class 5</option>
+                            <option value="6">Class 6</option>
+                            <option value="7">Class 7</option>
+                            <option value="8">Class 8</option>
+                            <option value="9">Class 9</option>
+                            <option value="10">Class 10</option>
                             <option value="11">Class 11</option>
                             <option value="12">Class 12</option>
+                            <option value="ba-1st">BA 1st Sem</option>
+                            <option value="ba-2nd">BA 2nd Sem</option>
+                            <option value="ba-3rd">BA 3rd Sem</option>
+                            <option value="ba-4th">BA 4th Sem</option>
+                            <option value="ba-5th">BA 5th Sem</option>
+                            <option value="ba-6th">BA 6th Sem</option>
+                            <option value="ba-7th">BA 7th Sem</option>
+                            <option value="ba-8th">BA 8th Sem</option>
                         </select>
                     </div>
                     <div class="form-group" id="optionsGroup">
@@ -512,7 +527,14 @@
 
         function updateActiveFilterDisplay() {
             let display = 'All';
-            if (selectedClass !== 'all') { display = 'Class ' + selectedClass; }
+            if (selectedClass !== 'all') { 
+                if (selectedClass.startsWith('ba-')) {
+                    const sem = selectedClass.replace('ba-', '');
+                    display = 'BA ' + sem + ' Sem';
+                } else {
+                    display = 'Class ' + selectedClass; 
+                }
+            }
             activeFilterDisplay.textContent = display;
         }
 
@@ -758,8 +780,17 @@
                         .toLocaleTimeString();
                     const typeLabel = isMCQ ? 'MCQ' : 'Q&A';
                     const classTag = q.classTag || 'all';
+                    let displayClass = classTag;
+                    if (classTag.startsWith('ba-')) {
+                        const sem = classTag.replace('ba-', '');
+                        displayClass = 'BA ' + sem + ' Sem';
+                    } else if (classTag !== 'all') {
+                        displayClass = 'Class ' + classTag;
+                    } else {
+                        displayClass = '';
+                    }
                     html +=
-                        `<div class="live-card ${cardClass}"><div class="question-number"><span class="num-badge">Q${serialNumber}</span><span style="color:var(--text-secondary);">${typeLabel}</span>${classTag!=='all'?`<span class="class-tag">Class ${classTag}</span>`:''}</div><div class="question-text">${styledQ}</div>${optsHtml}${answerHtml}<div class="meta"><span><i class="far fa-clock"></i> ${time}</span><span><i class="fas fa-tag"></i> ${typeLabel}</span></div></div>`;
+                        `<div class="live-card ${cardClass}"><div class="question-number"><span class="num-badge">Q${serialNumber}</span><span style="color:var(--text-secondary);">${typeLabel}</span>${displayClass?`<span class="class-tag">${displayClass}</span>`:''}</div><div class="question-text">${styledQ}</div>${optsHtml}${answerHtml}<div class="meta"><span><i class="far fa-clock"></i> ${time}</span><span><i class="fas fa-tag"></i> ${typeLabel}</span></div></div>`;
                 });
                 if (html === '') { liveFeed.innerHTML =
                         `<div class="empty-state"><i class="fas fa-filter"></i><div>No ${currentView==='mcq'?'MCQ':'Q&A'} questions match your filters</div><div style="font-size:0.85rem;margin-top:4px;">Try switching views or clearing filters</div></div>`; } else
@@ -779,8 +810,17 @@
                         const type = getQuestionType(q);
                         const classTag = q.classTag || 'all';
                         const serial = q.serialNumber || '?';
+                        let displayClass = classTag;
+                        if (classTag.startsWith('ba-')) {
+                            const sem = classTag.replace('ba-', '');
+                            displayClass = 'BA ' + sem + ' Sem';
+                        } else if (classTag !== 'all') {
+                            displayClass = 'Class ' + classTag;
+                        } else {
+                            displayClass = '';
+                        }
                         html +=
-                            `<div class="question-item" data-id="${q.id}"><div class="q-text">#${serial} ${styled} <span style="font-size:0.65rem;color:var(--text-secondary);">[${type}] ${classTag!=='all'?'📚Class '+classTag:''}</span></div><div class="q-actions"><button class="edit-btn" data-id="${q.id}" title="Edit"><i class="fas fa-pen"></i></button><button class="delete-btn" data-id="${q.id}" title="Delete"><i class="fas fa-trash-alt"></i></button></div></div>`;
+                            `<div class="question-item" data-id="${q.id}"><div class="q-text">#${serial} ${styled} <span style="font-size:0.65rem;color:var(--text-secondary);">[${type}] ${displayClass?displayClass:''}</span></div><div class="q-actions"><button class="edit-btn" data-id="${q.id}" title="Edit"><i class="fas fa-pen"></i></button><button class="delete-btn" data-id="${q.id}" title="Delete"><i class="fas fa-trash-alt"></i></button></div></div>`;
                     });
                     questionListContainer.innerHTML = html;
                     document.querySelectorAll('.edit-btn').forEach(btn => { btn.addEventListener('click',
@@ -919,7 +959,7 @@
                         ], correct: [1], answer: '', type: 'mcq', serialNumber: 2, updatedAt: Date.now() -
                             1800000 },
                     { id: '3', text: 'Who wrote "The Republic"?', bold: false, italic: true, highlight: false,
-                        color: '#16a34a', class: 'text-green', classTag: '6', options: ['Plato', 'Aristotle',
+                        color: '#16a34a', class: 'text-green', classTag: 'ba-1st', options: ['Plato', 'Aristotle',
                             'Socrates', 'Cicero'
                         ], correct: [0], answer: '', type: 'mcq', serialNumber: 3, updatedAt: Date.now() -
                             1200000 },
@@ -929,7 +969,14 @@
                         updatedAt: Date.now() - 600000 },
                     { id: '5', text: 'What is 5 + 3?', bold: false, italic: false, highlight: false,
                         color: '#0891b2', class: 'text-cyan', classTag: '4', options: ['5', '8', '7', '9'],
-                        correct: [1], answer: '', type: 'mcq', serialNumber: 5, updatedAt: Date.now() - 300000 }
+                        correct: [1], answer: '', type: 'mcq', serialNumber: 5, updatedAt: Date.now() - 300000 },
+                    { id: '6', text: 'What is the capital of India?', bold: false, italic: false, highlight: false,
+                        color: '#0d9488', class: '', classTag: '9', options: ['Mumbai', 'Delhi', 'Kolkata', 'Chennai'
+                        ], correct: [1], answer: '', type: 'mcq', serialNumber: 6, updatedAt: Date.now() - 200000 },
+                    { id: '7', text: 'Who is the Prime Minister of India?', bold: false, italic: false,
+                        highlight: false, color: '#0891b2', class: 'text-cyan', classTag: '10', options: [
+                            'Narendra Modi', 'Rahul Gandhi', 'Amit Shah', 'Yogi Adityanath'
+                        ], correct: [0], answer: '', type: 'mcq', serialNumber: 7, updatedAt: Date.now() - 100000 }
                 ];
                 questionCounter = questions.length;
             }
@@ -953,7 +1000,7 @@
         setView('mcq');
         updateVisitorCount();
         loadData();
-        console.log('✅ Q&A MCQ Pro ready! Classes 1–12 included.');
+        console.log('✅ Q&A MCQ Pro ready! All classes 1–12 and BA 1st–8th Sem included.');
     </script>
 </body>
 </html>
